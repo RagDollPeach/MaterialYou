@@ -1,10 +1,15 @@
 package com.geekbrains.materialyou.view.picture
 
 import android.content.Intent
+import android.content.res.Resources
 import android.net.Uri
 import android.os.Bundle
 import android.view.*
+import android.widget.ImageView
+import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -14,6 +19,7 @@ import com.geekbrains.materialyou.R
 import com.geekbrains.materialyou.databinding.FragmentPictureOfTheDayBinding
 import com.geekbrains.materialyou.model.PictureOfTheDayData
 import com.geekbrains.materialyou.MainActivity
+import com.geekbrains.materialyou.util.toast
 import com.geekbrains.materialyou.view.chips.ChipsFragment
 import com.geekbrains.materialyou.viewmodel.PictureOfTheDayViewModel
 import com.google.android.material.bottomappbar.BottomAppBar
@@ -26,7 +32,6 @@ class PictureOfTheDayFragment : Fragment() {
 
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
 
-    //Ленивая инициализация модели
     private val viewModel: PictureOfTheDayViewModel by lazy {
         ViewModelProvider.NewInstanceFactory().create(PictureOfTheDayViewModel::class.java)
     }
@@ -79,32 +84,33 @@ class PictureOfTheDayFragment : Fragment() {
                 val serverResponseData = data.serverResponseData
                 val url = serverResponseData.url
                 if (url.isNullOrEmpty()) {
-                    //Отобразите ошибку
-                    //showError("Сообщение, что ссылка пустая")
-                    toast("Link is empty")
+                    showError("Link is empty")
                 } else {
-                    //Отобразите фото
-                    //showSuccess()
-                    //Coil в работе: достаточно вызвать у нашего ImageView нужную extension-функцию и передать ссылку на изображение
-                    //а в лямбде указать дополнительные параметры (не обязательно) для отображения ошибки, процесса загрузки, анимации смены изображений
                     binding.imageView.load(url) {
                         lifecycle(this@PictureOfTheDayFragment)
                         error(R.drawable.ic_load_error_vector)
                         placeholder(R.drawable.ic_no_photo_vector)
                         crossfade(true)
+
                     }
+                    binding.root.findViewById<TextView>(R.id.bottomSheetDescriptionHeader)
+                        .text = data.serverResponseData.title
+
+                    binding.root.findViewById<TextView>(R.id.bottomSheetDescription)
+                        .text = data.serverResponseData.explanation
                 }
             }
             is PictureOfTheDayData.Loading -> {
-                //Отобразите загрузку
-                //showLoading()
+                showLoading()
             }
             is PictureOfTheDayData.Error -> {
-                //Отобразите ошибку
-                //showError(data.error.message)
-                toast(data.error.message)
+                showError(data.error.message)
             }
         }
+    }
+
+    private fun showLoading() {
+        // не получается пока что решить эту проблему
     }
 
     private fun setBottomAppBar(view: View) {
@@ -129,16 +135,13 @@ class PictureOfTheDayFragment : Fragment() {
         }
     }
 
+    private fun showError(message: String?) {
+        toast(message)
+    }
+
     private fun setBottomSheetBehavior(bottomSheet: ConstraintLayout) {
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-    }
-
-    private fun Fragment.toast(string: String?) {
-        Toast.makeText(context, string, Toast.LENGTH_SHORT).apply {
-            setGravity(Gravity.BOTTOM, 0, 250)
-            show()
-        }
     }
 
     override fun onDestroyView() {
