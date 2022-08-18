@@ -5,6 +5,7 @@
     android:layout_height="match_parent">
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -20,6 +21,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
                 android:hint="@string/search_wiki"
                 app:counterEnabled="true"
                 app:counterMaxLength="20"
@@ -52,7 +54,10 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <include layout="@layout/loading_bar" />
+    <include
+        layout="@layout/loading_bar"
+        app:layout_anchor="@+id/nestedScrollView"
+        app:layout_anchorGravity="center" />
 
     <include layout="@layout/bottom_sheet_layout" />
 

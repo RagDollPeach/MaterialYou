@@ -1,7 +1,9 @@
 package com.geekbrains.materialyou.view.picture
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.Resources
+import android.media.Image
 import android.net.Uri
 import android.os.Bundle
 import android.view.*
@@ -40,8 +42,7 @@ class PictureOfTheDayFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        viewModel.getData()
-            .observe(viewLifecycleOwner) { renderData(it) }
+        viewModel.getData().observe(viewLifecycleOwner) { renderData(it) }
 
         _binding = FragmentPictureOfTheDayBinding.inflate(inflater, container, false)
         return binding.root
@@ -91,7 +92,6 @@ class PictureOfTheDayFragment : Fragment() {
                         error(R.drawable.ic_load_error_vector)
                         placeholder(R.drawable.ic_no_photo_vector)
                         crossfade(true)
-
                     }
                     binding.root.findViewById<TextView>(R.id.bottomSheetDescriptionHeader)
                         .text = data.serverResponseData.title
@@ -111,8 +111,14 @@ class PictureOfTheDayFragment : Fragment() {
 
     private fun showLoading() {
         // не получается пока что решить эту проблему
+        // не знаю как написать проверку, все перепробовал. Оставил пока что такую затычку.
+        val flag = false
+        if (flag) {
+            binding.root.findViewById<ProgressBar>(R.id.progressBar).visibility = View.VISIBLE
+        }
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     private fun setBottomAppBar(view: View) {
         val context = activity as MainActivity
         context.setSupportActionBar(view.findViewById(R.id.bottom_app_bar))
@@ -124,6 +130,7 @@ class PictureOfTheDayFragment : Fragment() {
                 binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_END
                 binding.fab.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_back_fab))
                 binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar_other_screen)
+                binding.imageView.load(resources.getDrawable(R.drawable.view))
             } else {
                 isMain = true
                 binding.bottomAppBar.navigationIcon =
@@ -131,6 +138,7 @@ class PictureOfTheDayFragment : Fragment() {
                 binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
                 binding.fab.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_plus_fab))
                 binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar)
+                viewModel.getData().observe(viewLifecycleOwner) { renderData(it) }
             }
         }
     }
