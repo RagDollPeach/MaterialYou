@@ -5,12 +5,14 @@ import android.content.Intent
 import android.content.res.Resources
 import android.media.Image
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.*
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
@@ -26,6 +28,9 @@ import com.geekbrains.materialyou.view.chips.ChipsFragment
 import com.geekbrains.materialyou.viewmodel.PictureOfTheDayViewModel
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.chip.Chip
+import java.time.LocalDate
+import java.time.LocalDateTime
 
 class PictureOfTheDayFragment : Fragment() {
 
@@ -43,20 +48,25 @@ class PictureOfTheDayFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         viewModel.getData().observe(viewLifecycleOwner) { renderData(it) }
-
         _binding = FragmentPictureOfTheDayBinding.inflate(inflater, container, false)
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setBottomSheetBehavior(view.findViewById(R.id.bottom_sheet_container))
+        findInWiki()
+        setBottomAppBar(view)
+        switchPictures()
+    }
+
+    private fun findInWiki() {
         binding.inputLayout.setEndIconOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW).apply {
                 data = Uri.parse("https://en.wikipedia.org/wiki/${binding.inputEditText.text.toString()}")
             })
         }
-        setBottomAppBar(view)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -79,9 +89,33 @@ class PictureOfTheDayFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun switchPictures() {
+        binding.firstChip.isChecked = true
+        binding.dayChipGroup.setOnCheckedChangeListener { chipGroup, position ->
+            chipGroup.findViewById<Chip>(position)?.let {
+                when (it.id) {
+                    R.id.first_chip -> {
+                        viewModel.pictureOfTheDay()
+                    }
+                    R.id.second_chip -> {
+                        val yesterday = LocalDate.now().minusDays(1)
+                        viewModel.pictureOfTheDayWithDate(yesterday)
+                    }
+                    R.id.thread_chip -> {
+                        val beforeYesterday = LocalDate.now().minusDays(2)
+                        viewModel.pictureOfTheDayWithDate(beforeYesterday)
+                    }
+                    else -> viewModel.pictureOfTheDay()
+                }
+            }
+        }
+    }
+
     private fun renderData(data: PictureOfTheDayData) {
         when (data) {
             is PictureOfTheDayData.Success -> {
+                binding.root.findViewById<ProgressBar>(R.id.progressBar).visibility = View.GONE
                 val serverResponseData = data.serverResponseData
                 val url = serverResponseData.url
                 if (url.isNullOrEmpty()) {
@@ -98,25 +132,19 @@ class PictureOfTheDayFragment : Fragment() {
 
                     binding.root.findViewById<TextView>(R.id.bottomSheetDescription)
                         .text = data.serverResponseData.explanation
+
                 }
             }
             is PictureOfTheDayData.Loading -> {
-                showLoading()
+                binding.root.findViewById<ProgressBar>(R.id.progressBar).visibility = View.VISIBLE
             }
             is PictureOfTheDayData.Error -> {
                 showError(data.error.message)
+                binding.root.findViewById<ProgressBar>(R.id.progressBar).visibility = View.GONE
             }
         }
     }
 
-    private fun showLoading() {
-        // не получается пока что решить эту проблему
-        // не знаю как написать проверку, все перепробовал. Оставил пока что такую затычку.
-        val flag = false
-        if (flag) {
-            binding.root.findViewById<ProgressBar>(R.id.progressBar).visibility = View.VISIBLE
-        }
-    }
 
     @SuppressLint("UseCompatLoadingForDrawables")
     private fun setBottomAppBar(view: View) {
