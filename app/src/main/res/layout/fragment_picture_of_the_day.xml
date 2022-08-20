@@ -12,10 +12,10 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:orientation="vertical"
             android:id="@+id/main"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:orientation="vertical"
             android:paddingStart="10dp"
             android:paddingEnd="10dp">
 
@@ -26,6 +26,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:hint="@string/search_wiki"
+                android:background="@drawable/round_text_layout"
                 app:counterEnabled="true"
                 app:counterMaxLength="20"
                 app:endIconCheckable="true"
@@ -37,7 +38,11 @@
                     android:id="@+id/input_edit_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text" />
+                    android:backgroundTint="?attr/textInputEditTextBackground"
+                    android:background="@drawable/round_text_layout"
+                    android:inputType="text"
+
+                    />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.chip.ChipGroup
@@ -55,21 +60,27 @@
                     style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/today" />
+                    android:text="@string/today"
+                    app:chipStrokeColor="?attr/themeChipStrokeColor"
+                    app:chipStrokeWidth="2dp" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/second_chip"
                     style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/yesterday" />
+                    android:text="@string/yesterday"
+                    app:chipStrokeColor="?attr/themeChipStrokeColor"
+                    app:chipStrokeWidth="2dp" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/thread_chip"
                     style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/before_yesterday" />
+                    android:text="@string/before_yesterday"
+                    app:chipStrokeColor="?attr/themeChipStrokeColor"
+                    app:chipStrokeWidth="2dp" />
             </com.google.android.material.chip.ChipGroup>
 
             <com.geekbrains.materialyou.util.EquilateralImageView
@@ -81,6 +92,46 @@
                 app:layout_anchor="@+id/nestedScrollView"
                 app:layout_anchorGravity="center"
                 app:srcCompat="@drawable/ic_no_photo_vector" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/themeChipGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:singleSelection="true">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/mars_chip"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mars_theme"
+                    app:chipStrokeColor="?attr/themeChipStrokeColor"
+                    app:chipStrokeWidth="2dp" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/titan_chip"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/titan_theme"
+                    app:chipStrokeColor="?attr/themeChipStrokeColor"
+                    app:chipStrokeWidth="2dp" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/default_chip"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/default_theme"
+                    app:chipStrokeColor="?attr/themeChipStrokeColor"
+                    app:chipStrokeWidth="2dp" />
+            </com.google.android.material.chip.ChipGroup>
+
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
@@ -96,7 +147,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:backgroundTint="@color/colorPrimary"
+        android:backgroundTint="?attr/themeColorPrimary"
         app:fabAlignmentMode="center"
         app:hideOnScroll="true"
         app:layout_scrollFlags="scroll|enterAlways"
@@ -106,10 +157,10 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/colorAccent"
+        android:backgroundTint="?attr/themeColorFloatingButton"
         app:layout_anchor="@id/bottom_app_bar"
         app:srcCompat="@drawable/ic_plus_fab"
-        app:tint="#FFFFFF" />
+        app:tint="@android:color/white" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

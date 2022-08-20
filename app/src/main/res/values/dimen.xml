@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="chip_spacing_horizontal">25dp</dimen>
+    <dimen name="command_layout_margin_top_x">16dp</dimen>
+    <dimen name="text_view_text_size">18sp</dimen>
+    <dimen name="chip_start_padding_small">10dp</dimen>
+    <dimen name="text_view_layout_margin_small">8dp</dimen>
+    <dimen name="command_layout_marginTop_xx">24dp</dimen>
+    <dimen name="constraint_layout_padding_bottom">16dp</dimen>
+    <dimen name="command_layout_margin_start_x">16dp</dimen>
+    <dimen name="text_layout_width">240dp</dimen>
+    <dimen name="layout_width_zero">0dp</dimen>
+    <dimen name="command_layout_margin_end_x">16dp</dimen>
+    <dimen name="card_view_layout_height">160dp</dimen>
+</resources>

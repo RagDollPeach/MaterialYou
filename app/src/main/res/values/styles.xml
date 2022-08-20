@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    //Card view style
+    <style name="MyMaterialCardViewStyle" parent="Theme.MaterialYou" >
+        <item name="android:layout_width" >@dimen/layout_width_zero</item>
+        <item name="android:layout_height" >@dimen/card_view_layout_height</item>
+        <item name="android:layout_marginStart" >@dimen/command_layout_margin_start_x</item>
+        <item name="android:layout_marginTop" >@dimen/command_layout_margin_top_x</item>
+        <item name="android:layout_marginEnd" >@dimen/command_layout_margin_end_x</item>
+        <item name="android:backgroundTint" >@android:color/holo_orange_light</item>
+        <item name="android:textColor" >@android:color/holo_red_dark</item>
+    </style>
+
+    //Text layout style
+    <style name="TextInputLayoutStyle" parent="Theme.MaterialYou">
+        <item name="android:layout_width" >@dimen/text_layout_width</item>
+        <item name="android:layout_height" >wrap_content</item>
+        <item name="android:layout_marginStart" >@dimen/command_layout_margin_start_x</item>
+        <item name="android:layout_marginTop" >@dimen/command_layout_margin_top_x</item>
+        <item name="android:backgroundTint" >@android:color/darker_gray</item>
+    </style>
+
+    //Material button style
+    <style name="MaterialButtonStyle" parent="Theme.MaterialYou">
+        <item name="android:layout_width" >wrap_content</item>
+        <item name="android:layout_height" >wrap_content</item>
+        <item name="android:layout_marginStart" >@dimen/command_layout_margin_start_x</item>
+        <item name="android:layout_marginTop" >@dimen/command_layout_margin_top_x</item>
+        <item name="android:backgroundTint" >@android:color/holo_green_dark</item>
+        <item name="android:textColor" >@android:color/holo_red_light</item>
+    </style>
+</resources>

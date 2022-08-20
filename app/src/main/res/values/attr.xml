@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="themeColorPrimary" format="reference"/>
+    <attr name="themeColorFloatingButton" format="reference"/>
+    <attr name="themeColorPrimaryVariant" format="reference"/>
+    <attr name="textInputEditTextBackground" format="reference"/>
+    <attr name="themeChipStrokeColor" format="reference"/>
+</resources>
