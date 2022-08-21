@@ -5,4 +5,7 @@
     <attr name="themeColorPrimaryVariant" format="reference"/>
     <attr name="textInputEditTextBackground" format="reference"/>
     <attr name="themeChipStrokeColor" format="reference"/>
+    <attr name="themeFontFamily" format="reference"/>
+    <attr name="themeBackground" format="reference"/>
+    <attr name="themeBottomSheetBackground" format="reference"/>
 </resources>

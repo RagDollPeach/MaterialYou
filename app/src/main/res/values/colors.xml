@@ -9,9 +9,20 @@
     <color name="white">#FFFFFFFF</color>
     <color name="color_gray">#66000000</color>
     <color name="mars_color">#882F06</color>
+    <color name="mars_color_on_primary">#DFAB9A</color>
+    <color name="mars_color_secondary">#DDC887</color>
+    <color name="mars_color_secondary_variant">#9C2118</color>
+    <color name="mars_color_on_secondary">#350303</color>
     <color name="mars_color_variant">#A13715</color>
     <color name="titan_color_variant">#375514</color>
     <color name="titan_color">#9C27B0</color>
+    <color name="titan_color_primary">#4CAF50</color>
+    <color name="titan_color_primary_dark">#3F51B5</color>
+    <color name="titan_color_on_primary">#7E7B7A</color>
+    <color name="titan_color_secondary">#28C7DC</color>
+    <color name="titan_status_bar_color">#AF3EC2</color>
+    <color name="titan_color_on_secondary">#423535</color>
+    <color name="titan_color_secondary_variant">#280761</color>
     <color name="titan_floating_button_color">#1B6587</color>
     <color name="mars_color_floating_button">#EAD948</color>
 

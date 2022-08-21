@@ -5,7 +5,7 @@
     android:id="@+id/bottom_sheet_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f6f6fa"
+    android:background="?attr/themeBottomSheetBackground"
     app:behavior_hideable="true"
     app:behavior_peekHeight="120dp"
     android:visibility="visible"

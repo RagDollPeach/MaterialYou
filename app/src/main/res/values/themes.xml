@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.MaterialYou" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary" >@color/colorPrimary</item>
+        <item name="colorPrimary">@color/purple_700</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
@@ -12,43 +12,54 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-        <item name="themeColorPrimary" >@color/colorPrimary</item>
-        <item name="themeColorFloatingButton" >@color/colorAccent</item>
-        <item name="themeColorPrimaryVariant" >@color/mars_color_variant</item>
-        <item name="textInputEditTextBackground" >@android:color/holo_blue_dark</item>
-        <item name="themeChipStrokeColor" >@android:color/holo_blue_dark</item>
+        <item name="themeColorPrimary">@color/purple_700</item>
+        <item name="themeColorFloatingButton">@color/colorAccent</item>
+        <item name="themeColorPrimaryVariant">@color/mars_color_variant</item>
+        <item name="textInputEditTextBackground">@android:color/holo_blue_dark</item>
+        <item name="themeChipStrokeColor">@android:color/holo_blue_dark</item>
+        <item name="themeBackground">@drawable/earth</item>
+        <item name="themeFontFamily">@font/acme</item>
+        <item name="fontFamily">?attr/themeFontFamily</item>
+        <item name="themeBottomSheetBackground">@android:color/holo_blue_dark</item>
     </style>
 
     <style name="MarsStyle" parent="Theme.MaterialYou">
-        <item name="colorPrimary">#882F06</item>
-        <item name="android:colorPrimary">#882F06</item>
+        <item name="colorPrimary">@color/mars_color</item>
+        <item name="android:colorPrimary">@color/mars_color</item>
         <item name="colorPrimaryDark">@color/mars_color_variant</item>
-        <item name="colorOnPrimary">#DFAB9A</item>
-        <item name="colorSecondary">#DDC887</item>
-        <item name="colorSecondaryVariant">#9C2118</item>
-        <item name="colorOnSecondary">#350303</item>
+        <item name="colorOnPrimary">@color/mars_color_on_primary</item>
+        <item name="colorSecondary">@color/mars_color_secondary</item>
+        <item name="colorSecondaryVariant">@color/mars_color_secondary_variant</item>
+        <item name="colorOnSecondary">@color/mars_color_on_secondary</item>
+        <item name="themeFontFamily">@font/aclonica</item>
         <item name="android:statusBarColor">?attr/themeColorPrimaryVariant</item>
-        <item name="themeColorPrimary" >@color/mars_color</item>
-        <item name="themeColorFloatingButton" >@color/mars_color_floating_button</item>
-        <item name="themeColorPrimaryVariant" >@color/mars_color_variant</item>
-        <item name="textInputEditTextBackground" >@android:color/darker_gray</item>
-        <item name="themeChipStrokeColor" >@color/mars_color</item>
+        <item name="themeColorPrimary">@color/mars_color</item>
+        <item name="themeColorFloatingButton">@color/mars_color_floating_button</item>
+        <item name="themeColorPrimaryVariant">@color/mars_color_variant</item>
+        <item name="textInputEditTextBackground">@color/mars_color_variant</item>
+        <item name="themeChipStrokeColor">@color/mars_color</item>
+        <item name="themeBackground">@drawable/mars2</item>
+        <item name="fontFamily">?attr/themeFontFamily</item>
+        <item name="themeBottomSheetBackground">@color/mars_color_on_primary</item>
     </style>
 
     <style name="TitanStyle" parent="Theme.MaterialYou">
-        <item name="colorPrimary">#9C27B0</item>
-        <item name="android:colorPrimary">#4CAF50</item>
-        <item name="colorPrimaryDark">#3F51B5</item>
-        <item name="colorOnPrimary">#7E7B7A</item>
-        <item name="colorSecondary">#28C7DC</item>
-        <item name="colorSecondaryVariant">#280761</item>
-        <item name="colorOnSecondary">#423535</item>
-        <item name="android:statusBarColor">#DC1B0D</item>
-        <item name="themeColorPrimary" >@color/titan_color</item>
-        <item name="themeColorFloatingButton" >@color/titan_floating_button_color</item>
-        <item name="themeColorPrimaryVariant" >@color/titan_color_variant</item>
-        <item name="textInputEditTextBackground" >@android:color/white</item>
-        <item name="themeChipStrokeColor" >@color/titan_color</item>
-
+        <item name="colorPrimary">@color/titan_color_primary</item>
+        <item name="android:colorPrimary">@color/titan_color_primary</item>
+        <item name="colorPrimaryDark">@color/titan_color_primary_dark</item>
+        <item name="colorOnPrimary">@color/titan_color_on_primary</item>
+        <item name="colorSecondary">@color/titan_color_secondary</item>
+        <item name="colorSecondaryVariant">@color/titan_color_secondary_variant</item>
+        <item name="themeFontFamily">@font/aladin</item>
+        <item name="fontFamily">?attr/themeFontFamily</item>
+        <item name="colorOnSecondary">@color/titan_color_on_secondary</item>
+        <item name="android:statusBarColor">@color/titan_status_bar_color</item>
+        <item name="themeColorPrimary">@color/titan_color</item>
+        <item name="themeColorFloatingButton">@color/titan_floating_button_color</item>
+        <item name="themeColorPrimaryVariant">@color/titan_color_variant</item>
+        <item name="textInputEditTextBackground">@color/purple_200</item>
+        <item name="themeChipStrokeColor">@color/titan_color</item>
+        <item name="themeBackground">@drawable/titan2</item>
+        <item name="themeBottomSheetBackground">@color/purple_200</item>
     </style>
 </resources>

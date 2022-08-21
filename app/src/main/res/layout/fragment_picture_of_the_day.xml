@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="3dp">
+    android:padding="1dp">
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
@@ -25,8 +24,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:hint="@string/search_wiki"
                 android:background="@drawable/round_text_layout"
+                android:hint="@string/search_wiki"
                 app:counterEnabled="true"
                 app:counterMaxLength="20"
                 app:endIconCheckable="true"
@@ -38,17 +37,18 @@
                     android:id="@+id/input_edit_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="?attr/textInputEditTextBackground"
+                    android:fontFamily="?attr/themeFontFamily"
                     android:background="@drawable/round_text_layout"
-                    android:inputType="text"
+                    android:backgroundTint="?attr/textInputEditTextBackground"
+                    android:inputType="text" />
 
-                    />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/dayChipGroup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="?attr/themeFontFamily"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -60,6 +60,7 @@
                     style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="?attr/themeFontFamily"
                     android:text="@string/today"
                     app:chipStrokeColor="?attr/themeChipStrokeColor"
                     app:chipStrokeWidth="2dp" />
@@ -69,15 +70,17 @@
                     style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="?attr/themeFontFamily"
                     android:text="@string/yesterday"
                     app:chipStrokeColor="?attr/themeChipStrokeColor"
                     app:chipStrokeWidth="2dp" />
 
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/thread_chip"
+                    android:id="@+id/third_chip"
                     style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="?attr/themeFontFamily"
                     android:text="@string/before_yesterday"
                     app:chipStrokeColor="?attr/themeChipStrokeColor"
                     app:chipStrokeWidth="2dp" />
@@ -98,10 +101,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
                 app:singleSelection="true">
 
                 <com.google.android.material.chip.Chip
@@ -109,6 +108,7 @@
                     style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="?attr/themeFontFamily"
                     android:text="@string/mars_theme"
                     app:chipStrokeColor="?attr/themeChipStrokeColor"
                     app:chipStrokeWidth="2dp" />
@@ -118,6 +118,7 @@
                     style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="?attr/themeFontFamily"
                     android:text="@string/titan_theme"
                     app:chipStrokeColor="?attr/themeChipStrokeColor"
                     app:chipStrokeWidth="2dp" />
@@ -127,6 +128,7 @@
                     style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="?attr/themeFontFamily"
                     android:text="@string/default_theme"
                     app:chipStrokeColor="?attr/themeChipStrokeColor"
                     app:chipStrokeWidth="2dp" />
@@ -161,7 +163,6 @@
         app:layout_anchor="@id/bottom_app_bar"
         app:srcCompat="@drawable/ic_plus_fab"
         app:tint="@android:color/white" />
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

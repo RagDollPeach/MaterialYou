@@ -1,8 +1,8 @@
 package com.geekbrains.materialyou.view.picture
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
-import android.content.res.Resources
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -10,7 +10,6 @@ import android.view.*
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -20,6 +19,8 @@ import com.geekbrains.materialyou.MainActivity
 import com.geekbrains.materialyou.R
 import com.geekbrains.materialyou.databinding.FragmentPictureOfTheDayBinding
 import com.geekbrains.materialyou.model.PictureOfTheDayData
+import com.geekbrains.materialyou.util.APP_THEME
+import com.geekbrains.materialyou.util.NAME_SHARED_PREFERENCE
 import com.geekbrains.materialyou.util.toast
 import com.geekbrains.materialyou.view.chips.ChipsFragment
 import com.geekbrains.materialyou.viewmodel.PictureOfTheDayViewModel
@@ -33,8 +34,6 @@ class PictureOfTheDayFragment : Fragment() {
     private var _binding: FragmentPictureOfTheDayBinding? = null
     private val binding get() = _binding!!
 
-    private val nameSharedPreference = "LOGIN"
-    private val appTheme = "APP_THEME"
     private val marsTheme = 0
     private val defaultTheme = 1
     private val titanTheme = 2
@@ -46,7 +45,7 @@ class PictureOfTheDayFragment : Fragment() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        requireActivity().setTheme(getAppTheme(R.style.Theme_MaterialYou))
+        requireActivity().setTheme(getAppTheme(R.style.MarsStyle))
         super.onCreate(savedInstanceState)
     }
 
@@ -54,10 +53,8 @@ class PictureOfTheDayFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         viewModel.getData().observe(viewLifecycleOwner) { renderData(it) }
         _binding = FragmentPictureOfTheDayBinding.inflate(inflater, container, false)
-
         return binding.root
     }
 
@@ -71,8 +68,8 @@ class PictureOfTheDayFragment : Fragment() {
         initThemeChooser()
     }
 
-
     private fun initThemeChooser() {
+        binding.marsChip.isChecked = true
         initChip(binding.marsChip, marsTheme)
         initChip(binding.defaultChip, defaultTheme)
         initChip(binding.titanChip, titanTheme)
@@ -85,38 +82,24 @@ class PictureOfTheDayFragment : Fragment() {
         }
     }
 
-
     private fun getAppTheme(codeStyle: Int): Int {
         return codeStyleToStyleId(getCodeStyle(codeStyle))
     }
 
     private fun getCodeStyle(codeStyle: Int): Int {
-        val sharedPref = requireActivity().getSharedPreferences(nameSharedPreference, AppCompatActivity.MODE_PRIVATE)
-        return sharedPref.getInt(appTheme, codeStyle)
+        val sharedPref = requireActivity().getSharedPreferences(NAME_SHARED_PREFERENCE, Context.MODE_PRIVATE)
+        return sharedPref.getInt(APP_THEME, codeStyle)
     }
 
     private fun setAppTheme(codeStyle: Int) {
-        val sharedPref = requireActivity().getSharedPreferences(nameSharedPreference, AppCompatActivity.MODE_PRIVATE)
+        val sharedPref = requireActivity().getSharedPreferences(NAME_SHARED_PREFERENCE, Context.MODE_PRIVATE)
         val editor = sharedPref.edit()
-        editor.putInt(appTheme, codeStyle)
+        editor.putInt(APP_THEME, codeStyle)
         editor.apply()
 
     }
 
     private fun codeStyleToStyleId(codeStyle: Int): Int {
-        when (codeStyle) {
-            marsTheme -> {
-                requireActivity().window.statusBarColor = ContextCompat.getColor(requireContext(), R.color.mars_color)
-                requireActivity().window.setBackgroundDrawableResource(R.drawable.mars2)
-            }
-            titanTheme -> {
-                requireActivity().window.statusBarColor = ContextCompat.getColor(requireContext(), R.color.titan_color)
-                requireActivity().window.setBackgroundDrawableResource(R.drawable.titan2)
-            }
-            else -> {
-                requireActivity().window.setBackgroundDrawableResource(R.drawable.earth)
-            }
-        }
         when (codeStyle) {
             marsTheme -> return R.style.MarsStyle
             defaultTheme -> return R.style.Theme_MaterialYou
@@ -141,7 +124,8 @@ class PictureOfTheDayFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.app_bar_fav -> toast("Favourite")
-            R.id.app_bar_settings -> activity?.supportFragmentManager?.beginTransaction()?.add(R.id.container, ChipsFragment.newInstance())
+            R.id.app_bar_settings -> activity?.supportFragmentManager
+                ?.beginTransaction()?.replace(R.id.container, ChipsFragment.newInstance())
                 ?.addToBackStack(null)
                 ?.commit()
             android.R.id.home -> {
@@ -166,7 +150,7 @@ class PictureOfTheDayFragment : Fragment() {
                         val yesterday = LocalDate.now().minusDays(1)
                         viewModel.pictureOfTheDayWithDate(yesterday)
                     }
-                    R.id.thread_chip -> {
+                    R.id.third_chip -> {
                         val beforeYesterday = LocalDate.now().minusDays(2)
                         viewModel.pictureOfTheDayWithDate(beforeYesterday)
                     }
