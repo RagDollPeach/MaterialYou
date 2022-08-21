@@ -21,6 +21,8 @@
         <item name="themeFontFamily">@font/acme</item>
         <item name="fontFamily">?attr/themeFontFamily</item>
         <item name="themeBottomSheetBackground">@android:color/holo_blue_dark</item>
+        <item name="chipCornerRadius" >20dp</item>
+        <item name="chipStrokeWidth" >2dp</item>
     </style>
 
     <style name="MarsStyle" parent="Theme.MaterialYou">
@@ -41,6 +43,8 @@
         <item name="themeBackground">@drawable/mars2</item>
         <item name="fontFamily">?attr/themeFontFamily</item>
         <item name="themeBottomSheetBackground">@color/mars_color_on_primary</item>
+        <item name="chipCornerRadius" >10dp</item>
+        <item name="chipStrokeWidth" >2dp</item>
     </style>
 
     <style name="TitanStyle" parent="Theme.MaterialYou">
@@ -60,6 +64,8 @@
         <item name="textInputEditTextBackground">@color/purple_200</item>
         <item name="themeChipStrokeColor">@color/titan_color</item>
         <item name="themeBackground">@drawable/titan2</item>
+        <item name="chipCornerRadius" >0dp</item>
         <item name="themeBottomSheetBackground">@color/purple_200</item>
+        <item name="chipStrokeWidth" >2dp</item>
     </style>
 </resources>

@@ -24,6 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
+                android:layout_marginTop="5dp"
                 android:background="@drawable/round_text_layout"
                 android:hint="@string/search_wiki"
                 app:counterEnabled="true"
