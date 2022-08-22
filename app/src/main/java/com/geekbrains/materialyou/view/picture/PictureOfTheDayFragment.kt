@@ -19,9 +19,7 @@ import com.geekbrains.materialyou.MainActivity
 import com.geekbrains.materialyou.R
 import com.geekbrains.materialyou.databinding.FragmentPictureOfTheDayBinding
 import com.geekbrains.materialyou.model.PictureOfTheDayData
-import com.geekbrains.materialyou.util.APP_THEME
-import com.geekbrains.materialyou.util.NAME_SHARED_PREFERENCE
-import com.geekbrains.materialyou.util.toast
+import com.geekbrains.materialyou.util.*
 import com.geekbrains.materialyou.view.chips.ChipsFragment
 import com.geekbrains.materialyou.viewmodel.PictureOfTheDayViewModel
 import com.google.android.material.bottomappbar.BottomAppBar
@@ -37,6 +35,10 @@ class PictureOfTheDayFragment : Fragment() {
     private val marsTheme = 0
     private val defaultTheme = 1
     private val titanTheme = 2
+
+    private val today= 1
+    private val yesterday = 2
+    private val beforeYesterday = 3
 
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
 
@@ -66,9 +68,19 @@ class PictureOfTheDayFragment : Fragment() {
         setBottomAppBar(view)
         switchPictures()
         initThemeChooser()
+        setChipOfPicture()
     }
 
-    private fun initThemeChooser() {
+    private fun setChipOfPicture() {
+        val sp = requireActivity().getSharedPreferences(PICTURE_SP_NAME, Context.MODE_PRIVATE)
+        when (sp.getInt(PICTURE_SP_KEY, 1)) {
+            today -> binding.todayChip.isChecked = true
+            yesterday -> binding.yesterdayChip.isChecked = true
+            beforeYesterday -> binding.beforeYesterdayChip.isChecked = true
+        }
+    }
+
+    private fun setChipOfTheme() {
         val sp =
             requireActivity().getSharedPreferences(NAME_SHARED_PREFERENCE, Context.MODE_PRIVATE)
         when (sp.getInt(APP_THEME, 0)) {
@@ -76,6 +88,10 @@ class PictureOfTheDayFragment : Fragment() {
             titanTheme -> binding.titanChip.isChecked = true
             defaultTheme -> binding.earthChip.isChecked = true
         }
+    }
+
+    private fun initThemeChooser() {
+        setChipOfTheme()
 
         initChip(binding.marsChip, marsTheme)
         initChip(binding.earthChip, defaultTheme)
@@ -110,7 +126,7 @@ class PictureOfTheDayFragment : Fragment() {
         editor.apply()
     }
 
-    private fun codeStyleToStyleId(codeStyle: Int): Int {
+    private fun setStatusBarColor(codeStyle: Int) {
         when (codeStyle) {
             marsTheme -> requireActivity().window.statusBarColor =
                 ContextCompat.getColor(requireContext(), R.color.mars_color)
@@ -119,6 +135,10 @@ class PictureOfTheDayFragment : Fragment() {
             defaultTheme -> requireActivity().window.statusBarColor =
                 ContextCompat.getColor(requireContext(), R.color.colorPrimary)
         }
+    }
+
+    private fun codeStyleToStyleId(codeStyle: Int): Int {
+        setStatusBarColor(codeStyle)
 
         when (codeStyle) {
             marsTheme -> return R.style.MarsStyle
@@ -160,20 +180,23 @@ class PictureOfTheDayFragment : Fragment() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun switchPictures() {
-        binding.firstChip.isChecked = true
+        val pref = requireActivity().getSharedPreferences(PICTURE_SP_NAME, Context.MODE_PRIVATE)
         binding.dayChipGroup.setOnCheckedChangeListener { chipGroup, position ->
             chipGroup.findViewById<Chip>(position)?.let {
                 when (it.id) {
-                    R.id.first_chip -> {
+                    R.id.today_chip -> {
                         viewModel.pictureOfTheDay()
+                        pref.edit().putInt(PICTURE_SP_KEY ,1).apply()
                     }
-                    R.id.second_chip -> {
+                    R.id.yesterday_chip -> {
                         val yesterday = LocalDate.now().minusDays(1)
                         viewModel.pictureOfTheDayWithDate(yesterday)
+                        pref.edit().putInt(PICTURE_SP_KEY ,2).apply()
                     }
-                    R.id.third_chip -> {
+                    R.id.before_yesterday_chip -> {
                         val beforeYesterday = LocalDate.now().minusDays(2)
                         viewModel.pictureOfTheDayWithDate(beforeYesterday)
+                        pref.edit().putInt(PICTURE_SP_KEY ,3).apply()
                     }
                     else -> viewModel.pictureOfTheDay()
                 }
@@ -237,8 +260,18 @@ class PictureOfTheDayFragment : Fragment() {
                 binding.fab.setImageDrawable(
                     ContextCompat.getDrawable(context, R.drawable.ic_plus_fab))
                 binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar)
-                viewModel.getData().observe(viewLifecycleOwner) { renderData(it) }
+                unKnownMethod()
             }
+        }
+    }
+    // этот метод просто как затычка для возврата на картинку из апи
+    private fun unKnownMethod() {
+        if (binding.yesterdayChip.isChecked) {
+            binding.todayChip.isChecked = true
+        } else if (binding.todayChip.isChecked) {
+            binding.yesterdayChip.isChecked = true
+        } else if (binding.beforeYesterdayChip.isChecked){
+            binding.yesterdayChip.isChecked = true
         }
     }
 
