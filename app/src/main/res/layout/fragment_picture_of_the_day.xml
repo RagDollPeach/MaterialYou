@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/themeBackground"
     android:padding="1dp">
 
     <androidx.core.widget.NestedScrollView
@@ -23,8 +24,8 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
                 android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
                 android:background="@drawable/round_text_layout"
                 android:hint="@string/search_wiki"
                 app:counterEnabled="true"
@@ -38,9 +39,9 @@
                     android:id="@+id/input_edit_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="?attr/themeFontFamily"
                     android:background="@drawable/round_text_layout"
                     android:backgroundTint="?attr/textInputEditTextBackground"
+                    android:fontFamily="?attr/themeFontFamily"
                     android:inputType="text" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -125,7 +126,7 @@
                     app:chipStrokeWidth="2dp" />
 
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/default_chip"
+                    android:id="@+id/earth_chip"
                     style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

@@ -69,16 +69,26 @@ class PictureOfTheDayFragment : Fragment() {
     }
 
     private fun initThemeChooser() {
-        binding.marsChip.isChecked = true
+        val sp =
+            requireActivity().getSharedPreferences(NAME_SHARED_PREFERENCE, Context.MODE_PRIVATE)
+        when (sp.getInt(APP_THEME, 0)) {
+            marsTheme -> binding.marsChip.isChecked = true
+            titanTheme -> binding.titanChip.isChecked = true
+            defaultTheme -> binding.earthChip.isChecked = true
+        }
+
         initChip(binding.marsChip, marsTheme)
-        initChip(binding.defaultChip, defaultTheme)
+        initChip(binding.earthChip, defaultTheme)
         initChip(binding.titanChip, titanTheme)
     }
 
     private fun initChip(button: View, codeStyle: Int) {
         button.setOnClickListener {
             setAppTheme(codeStyle)
-            requireActivity().recreate()
+            requireActivity().supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.container, PictureOfTheDayFragment())
+                .commitNow()
         }
     }
 
@@ -87,19 +97,29 @@ class PictureOfTheDayFragment : Fragment() {
     }
 
     private fun getCodeStyle(codeStyle: Int): Int {
-        val sharedPref = requireActivity().getSharedPreferences(NAME_SHARED_PREFERENCE, Context.MODE_PRIVATE)
+        val sharedPref =
+            requireActivity().getSharedPreferences(NAME_SHARED_PREFERENCE, Context.MODE_PRIVATE)
         return sharedPref.getInt(APP_THEME, codeStyle)
     }
 
     private fun setAppTheme(codeStyle: Int) {
-        val sharedPref = requireActivity().getSharedPreferences(NAME_SHARED_PREFERENCE, Context.MODE_PRIVATE)
+        val sharedPref =
+            requireActivity().getSharedPreferences(NAME_SHARED_PREFERENCE, Context.MODE_PRIVATE)
         val editor = sharedPref.edit()
         editor.putInt(APP_THEME, codeStyle)
         editor.apply()
-
     }
 
     private fun codeStyleToStyleId(codeStyle: Int): Int {
+        when (codeStyle) {
+            marsTheme -> requireActivity().window.statusBarColor =
+                ContextCompat.getColor(requireContext(), R.color.mars_color)
+            titanTheme -> requireActivity().window.statusBarColor =
+                ContextCompat.getColor(requireContext(), R.color.titan_color)
+            defaultTheme -> requireActivity().window.statusBarColor =
+                ContextCompat.getColor(requireContext(), R.color.colorPrimary)
+        }
+
         when (codeStyle) {
             marsTheme -> return R.style.MarsStyle
             defaultTheme -> return R.style.Theme_MaterialYou
@@ -111,7 +131,8 @@ class PictureOfTheDayFragment : Fragment() {
     private fun findInWiki() {
         binding.inputLayout.setEndIconOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW).apply {
-                data = Uri.parse("https://en.wikipedia.org/wiki/${binding.inputEditText.text.toString()}")
+                data =
+                    Uri.parse("https://en.wikipedia.org/wiki/${binding.inputEditText.text.toString()}")
             })
         }
     }
@@ -204,7 +225,8 @@ class PictureOfTheDayFragment : Fragment() {
                 isMain = false
                 binding.bottomAppBar.navigationIcon = null
                 binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_END
-                binding.fab.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_back_fab))
+                binding.fab.setImageDrawable(
+                    ContextCompat.getDrawable(context, R.drawable.ic_back_fab))
                 binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar_other_screen)
                 binding.imageView.load(resources.getDrawable(R.drawable.view))
             } else {
@@ -212,7 +234,8 @@ class PictureOfTheDayFragment : Fragment() {
                 binding.bottomAppBar.navigationIcon =
                     ContextCompat.getDrawable(context, R.drawable.ic_hamburger_menu_bottom_bar)
                 binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
-                binding.fab.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_plus_fab))
+                binding.fab.setImageDrawable(
+                    ContextCompat.getDrawable(context, R.drawable.ic_plus_fab))
                 binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar)
                 viewModel.getData().observe(viewLifecycleOwner) { renderData(it) }
             }
