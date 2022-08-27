@@ -46,15 +46,11 @@ class PictureOfTheDayFragment : Fragment() {
         ViewModelProvider.NewInstanceFactory().create(PictureOfTheDayViewModel::class.java)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        requireActivity().setTheme(getAppTheme(R.style.MarsStyle))
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        (requireActivity() as MainActivity).setTheme(getAppTheme(R.style.MarsStyle))
         viewModel.getData().observe(viewLifecycleOwner) { renderData(it) }
         _binding = FragmentPictureOfTheDayBinding.inflate(inflater, container, false)
         return binding.root
@@ -140,12 +136,13 @@ class PictureOfTheDayFragment : Fragment() {
     private fun codeStyleToStyleId(codeStyle: Int): Int {
         setStatusBarColor(codeStyle)
 
-        when (codeStyle) {
-            marsTheme -> return R.style.MarsStyle
-            defaultTheme -> return R.style.Theme_MaterialYou
-            titanTheme -> return R.style.TitanStyle
-        }
-        return -1
+      return  when (codeStyle) {
+            marsTheme -> R.style.MarsStyle
+            defaultTheme ->  R.style.Theme_MaterialYou
+            titanTheme ->  R.style.TitanStyle
+
+          else -> marsTheme
+      }
     }
 
     private fun findInWiki() {
@@ -264,7 +261,7 @@ class PictureOfTheDayFragment : Fragment() {
             }
         }
     }
-    // этот метод просто как затычка для возврата на картинку из апи
+
     private fun unKnownMethod() {
         if (binding.yesterdayChip.isChecked) {
             binding.todayChip.isChecked = true

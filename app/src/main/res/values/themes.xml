@@ -19,7 +19,7 @@
         <item name="themeChipStrokeColor">@android:color/holo_blue_dark</item>
         <item name="themeBackground">@drawable/earth</item>
         <item name="themeFontFamily">@font/acme</item>
-        <item name="fontFamily">?attr/themeFontFamily</item>
+        <item name="android:fontFamily">?attr/themeFontFamily</item>
         <item name="themeBottomSheetBackground">@android:color/holo_blue_dark</item>
         <item name="chipCornerRadius" >20dp</item>
         <item name="chipStrokeWidth" >2dp</item>
@@ -34,6 +34,7 @@
         <item name="colorSecondaryVariant">@color/mars_color_secondary_variant</item>
         <item name="colorOnSecondary">@color/mars_color_on_secondary</item>
         <item name="themeFontFamily">@font/aclonica</item>
+        <item name="android:fontFamily">?attr/themeFontFamily</item>
         <item name="android:statusBarColor">?attr/themeColorPrimaryVariant</item>
         <item name="themeColorPrimary">@color/mars_color</item>
         <item name="themeColorFloatingButton">@color/mars_color_floating_button</item>
@@ -41,7 +42,6 @@
         <item name="textInputEditTextBackground">@color/mars_color_variant</item>
         <item name="themeChipStrokeColor">@color/mars_color</item>
         <item name="themeBackground">@drawable/mars2</item>
-        <item name="fontFamily">?attr/themeFontFamily</item>
         <item name="themeBottomSheetBackground">@color/mars_color_on_primary</item>
         <item name="chipCornerRadius" >10dp</item>
         <item name="chipStrokeWidth" >2dp</item>
@@ -55,7 +55,7 @@
         <item name="colorSecondary">@color/titan_color_secondary</item>
         <item name="colorSecondaryVariant">@color/titan_color_secondary_variant</item>
         <item name="themeFontFamily">@font/aladin</item>
-        <item name="fontFamily">?attr/themeFontFamily</item>
+        <item name="android:fontFamily">?attr/themeFontFamily</item>
         <item name="colorOnSecondary">@color/titan_color_on_secondary</item>
         <item name="android:statusBarColor">@color/titan_status_bar_color</item>
         <item name="themeColorPrimary">@color/titan_color</item>

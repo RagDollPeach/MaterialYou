@@ -29,4 +29,9 @@
         <item name="android:backgroundTint" >@android:color/holo_green_dark</item>
         <item name="android:textColor" >@android:color/holo_red_light</item>
     </style>
+
+   //font for chips
+    <style name="AppChipStyle" parent="@style/Widget.MaterialComponents.Chip.Choice">
+        <item name="android:fontFamily">?attr/themeFontFamily</item>
+    </style>
 </resources>

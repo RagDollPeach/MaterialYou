@@ -41,7 +41,6 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/round_text_layout"
                     android:backgroundTint="?attr/textInputEditTextBackground"
-                    android:fontFamily="?attr/themeFontFamily"
                     android:inputType="text" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -50,7 +49,6 @@
                 android:id="@+id/dayChipGroup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="?attr/themeFontFamily"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -59,30 +57,27 @@
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/today_chip"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    style="@style/AppChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="?attr/themeFontFamily"
                     android:text="@string/today"
                     app:chipStrokeColor="?attr/themeChipStrokeColor"
                     app:chipStrokeWidth="2dp" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/yesterday_chip"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    style="@style/AppChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="?attr/themeFontFamily"
                     android:text="@string/yesterday"
                     app:chipStrokeColor="?attr/themeChipStrokeColor"
                     app:chipStrokeWidth="2dp" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/before_yesterday_chip"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    style="@style/AppChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="?attr/themeFontFamily"
                     android:text="@string/before_yesterday"
                     app:chipStrokeColor="?attr/themeChipStrokeColor"
                     app:chipStrokeWidth="2dp" />
@@ -107,30 +102,27 @@
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/mars_chip"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    style="@style/AppChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="?attr/themeFontFamily"
                     android:text="@string/mars_theme"
                     app:chipStrokeColor="?attr/themeChipStrokeColor"
                     app:chipStrokeWidth="2dp" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/titan_chip"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    style="@style/AppChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="?attr/themeFontFamily"
                     android:text="@string/titan_theme"
                     app:chipStrokeColor="?attr/themeChipStrokeColor"
                     app:chipStrokeWidth="2dp" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/earth_chip"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    style="@style/AppChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="?attr/themeFontFamily"
                     android:text="@string/default_theme"
                     app:chipStrokeColor="?attr/themeChipStrokeColor"
                     app:chipStrokeWidth="2dp" />
