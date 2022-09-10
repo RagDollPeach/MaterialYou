@@ -45,6 +45,7 @@
         <item name="themeBottomSheetBackground">@color/mars_color_on_primary</item>
         <item name="chipCornerRadius" >10dp</item>
         <item name="chipStrokeWidth" >2dp</item>
+
     </style>
 
     <style name="TitanStyle" parent="Theme.MaterialYou">
@@ -52,7 +53,7 @@
         <item name="android:colorPrimary">@color/titan_color_primary</item>
         <item name="colorPrimaryDark">@color/titan_color_primary_dark</item>
         <item name="colorOnPrimary">@color/titan_color_on_primary</item>
-        <item name="colorSecondary">@color/titan_color_secondary</item>
+        <item name="colorSecondary">@color/titan_color</item>
         <item name="colorSecondaryVariant">@color/titan_color_secondary_variant</item>
         <item name="themeFontFamily">@font/aladin</item>
         <item name="android:fontFamily">?attr/themeFontFamily</item>

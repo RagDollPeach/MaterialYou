@@ -66,7 +66,7 @@ class PictureOfTheDayFragment : Fragment() {
         initThemeChooser()
         setChipOfPicture()
     }
-
+    //testing
     private fun setChipOfPicture() {
         val sp = requireActivity().getSharedPreferences(PICTURE_SP_NAME, Context.MODE_PRIVATE)
         when (sp.getInt(PICTURE_SP_KEY, 1)) {
