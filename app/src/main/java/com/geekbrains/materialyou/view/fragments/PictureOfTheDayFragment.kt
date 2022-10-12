@@ -1,6 +1,5 @@
-package com.geekbrains.materialyou.view.picture
+package com.geekbrains.materialyou.view.fragments
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -21,6 +20,7 @@ import com.geekbrains.materialyou.databinding.FragmentPictureOfTheDayBinding
 import com.geekbrains.materialyou.model.PictureOfTheDayData
 import com.geekbrains.materialyou.util.*
 import com.geekbrains.materialyou.view.chips.ChipsFragment
+import com.geekbrains.materialyou.view.navigation.ViewPageFragment
 import com.geekbrains.materialyou.viewmodel.PictureOfTheDayViewModel
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -36,11 +36,16 @@ class PictureOfTheDayFragment : Fragment() {
     private val defaultTheme = 1
     private val titanTheme = 2
 
-    private val today= 1
+    private val today = 1
     private val yesterday = 2
     private val beforeYesterday = 3
 
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
+
+    companion object {
+        fun newInstance() = PictureOfTheDayFragment()
+        private var isMain = true
+    }
 
     private val viewModel: PictureOfTheDayViewModel by lazy {
         ViewModelProvider.NewInstanceFactory().create(PictureOfTheDayViewModel::class.java)
@@ -66,7 +71,7 @@ class PictureOfTheDayFragment : Fragment() {
         initThemeChooser()
         setChipOfPicture()
     }
-    //testing
+
     private fun setChipOfPicture() {
         val sp = requireActivity().getSharedPreferences(PICTURE_SP_NAME, Context.MODE_PRIVATE)
         when (sp.getInt(PICTURE_SP_KEY, 1)) {
@@ -97,10 +102,11 @@ class PictureOfTheDayFragment : Fragment() {
     private fun initChip(button: View, codeStyle: Int) {
         button.setOnClickListener {
             setAppTheme(codeStyle)
-            requireActivity().supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.container, PictureOfTheDayFragment())
-                .commitNow()
+            requireActivity().supportFragmentManager.apply {
+                beginTransaction()
+                    .replace(R.id.container, newInstance())
+                    .commitNow()
+            }
         }
     }
 
@@ -136,13 +142,13 @@ class PictureOfTheDayFragment : Fragment() {
     private fun codeStyleToStyleId(codeStyle: Int): Int {
         setStatusBarColor(codeStyle)
 
-      return  when (codeStyle) {
+        return when (codeStyle) {
             marsTheme -> R.style.MarsStyle
-            defaultTheme ->  R.style.Theme_MaterialYou
-            titanTheme ->  R.style.TitanStyle
+            defaultTheme -> R.style.Theme_MaterialYou
+            titanTheme -> R.style.TitanStyle
 
-          else -> marsTheme
-      }
+            else -> marsTheme
+        }
     }
 
     private fun findInWiki() {
@@ -161,11 +167,16 @@ class PictureOfTheDayFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.app_bar_fav -> toast("Favourite")
-            R.id.app_bar_settings -> activity?.supportFragmentManager
-                ?.beginTransaction()?.replace(R.id.container, ChipsFragment.newInstance())
-                ?.addToBackStack(null)
-                ?.commit()
+            R.id.app_bar_fav -> requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.container, ViewPageFragment())
+                .addToBackStack("")
+                .commit()
+            R.id.app_bar_settings -> requireActivity().supportFragmentManager.apply {
+                beginTransaction()
+                    .replace(R.id.container, ChipsFragment())
+                    .addToBackStack("")
+                    .commit()
+            }
             android.R.id.home -> {
                 activity?.let {
                     BottomNavigationDrawerFragment().show(it.supportFragmentManager, "tag")
@@ -183,17 +194,17 @@ class PictureOfTheDayFragment : Fragment() {
                 when (it.id) {
                     R.id.today_chip -> {
                         viewModel.pictureOfTheDay()
-                        pref.edit().putInt(PICTURE_SP_KEY ,1).apply()
+                        pref.edit().putInt(PICTURE_SP_KEY, 1).apply()
                     }
                     R.id.yesterday_chip -> {
                         val yesterday = LocalDate.now().minusDays(1)
                         viewModel.pictureOfTheDayWithDate(yesterday)
-                        pref.edit().putInt(PICTURE_SP_KEY ,2).apply()
+                        pref.edit().putInt(PICTURE_SP_KEY, 2).apply()
                     }
                     R.id.before_yesterday_chip -> {
                         val beforeYesterday = LocalDate.now().minusDays(2)
                         viewModel.pictureOfTheDayWithDate(beforeYesterday)
-                        pref.edit().putInt(PICTURE_SP_KEY ,3).apply()
+                        pref.edit().putInt(PICTURE_SP_KEY, 3).apply()
                     }
                     else -> viewModel.pictureOfTheDay()
                 }
@@ -221,7 +232,6 @@ class PictureOfTheDayFragment : Fragment() {
 
                     binding.root.findViewById<TextView>(R.id.bottomSheetDescription)
                         .text = data.serverResponseData.explanation
-
                 }
             }
             is PictureOfTheDayData.Loading -> {
@@ -234,8 +244,6 @@ class PictureOfTheDayFragment : Fragment() {
         }
     }
 
-
-    @SuppressLint("UseCompatLoadingForDrawables")
     private fun setBottomAppBar(view: View) {
         val context = activity as MainActivity
         context.setSupportActionBar(view.findViewById(R.id.bottom_app_bar))
@@ -246,29 +254,19 @@ class PictureOfTheDayFragment : Fragment() {
                 binding.bottomAppBar.navigationIcon = null
                 binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_END
                 binding.fab.setImageDrawable(
-                    ContextCompat.getDrawable(context, R.drawable.ic_back_fab))
+                    ContextCompat.getDrawable(context, R.drawable.ic_back_fab)
+                )
                 binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar_other_screen)
-                binding.imageView.load(resources.getDrawable(R.drawable.view))
             } else {
                 isMain = true
                 binding.bottomAppBar.navigationIcon =
                     ContextCompat.getDrawable(context, R.drawable.ic_hamburger_menu_bottom_bar)
                 binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
                 binding.fab.setImageDrawable(
-                    ContextCompat.getDrawable(context, R.drawable.ic_plus_fab))
+                    ContextCompat.getDrawable(context, R.drawable.ic_plus_fab)
+                )
                 binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar)
-                unKnownMethod()
             }
-        }
-    }
-
-    private fun unKnownMethod() {
-        if (binding.yesterdayChip.isChecked) {
-            binding.todayChip.isChecked = true
-        } else if (binding.todayChip.isChecked) {
-            binding.yesterdayChip.isChecked = true
-        } else if (binding.beforeYesterdayChip.isChecked){
-            binding.yesterdayChip.isChecked = true
         }
     }
 
@@ -284,10 +282,5 @@ class PictureOfTheDayFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    companion object {
-        fun newInstance() = PictureOfTheDayFragment()
-        private var isMain = true
     }
 }

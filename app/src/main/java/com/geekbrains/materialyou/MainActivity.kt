@@ -3,7 +3,7 @@ package com.geekbrains.materialyou
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.geekbrains.materialyou.databinding.ActivityMainBinding
-import com.geekbrains.materialyou.view.picture.PictureOfTheDayFragment
+import com.geekbrains.materialyou.view.navigation.ViewPageFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -13,9 +13,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.container, PictureOfTheDayFragment.newInstance())
+                .replace(R.id.container, ViewPageFragment())
                 .commitNow()
         }
     }

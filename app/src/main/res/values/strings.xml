@@ -47,4 +47,10 @@
     <string name="mars_theme">Mars theme</string>
     <string name="titan_theme">Titan theme</string>
     <string name="default_theme">Earth theme</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="back">Back</string>
+    <string name="system">System</string>
+    <string name="earth">Earth</string>
+    <string name="mars">Mars</string>
 </resources>

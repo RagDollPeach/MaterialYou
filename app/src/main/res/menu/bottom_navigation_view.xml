@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/system_menu"
+        android:title="@string/system"
+        android:icon="@drawable/ic_archive"
+        />
+
+    <item android:id="@+id/mars_menu"
+        android:title="@string/mars"
+        android:icon="@drawable/ic_search"
+        />
+
+    <item android:id="@+id/earth_menu"
+        android:title="@string/earth"
+        android:icon="@drawable/ic_favourite_menu"
+        />
+
+    <item android:id="@+id/back_menu"
+        android:title="@string/back"
+        android:icon="@drawable/ic_back_fab"/>
+
+</menu>

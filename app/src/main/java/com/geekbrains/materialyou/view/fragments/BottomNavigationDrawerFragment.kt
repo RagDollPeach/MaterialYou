@@ -1,4 +1,4 @@
-package com.geekbrains.materialyou.view.picture
+package com.geekbrains.materialyou.view.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater

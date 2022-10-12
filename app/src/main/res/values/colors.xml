@@ -19,6 +19,7 @@
     <color name="titan_color_primary">#793B83</color>
     <color name="titan_color_primary_dark">#3F51B5</color>
     <color name="titan_color_on_primary">#B46AC1</color>
+    <color name="red">#F6062A</color>
     <color name="titan_color_secondary">#28C7DC</color>
     <color name="titan_status_bar_color">#AF3EC2</color>
     <color name="titan_color_on_secondary">#423535</color>
