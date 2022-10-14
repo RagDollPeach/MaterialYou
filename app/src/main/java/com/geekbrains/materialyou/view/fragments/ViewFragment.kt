@@ -53,7 +53,6 @@ class ViewFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.pictureOfTheDayWithDate(LocalDate.now().minusDays(1))
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
