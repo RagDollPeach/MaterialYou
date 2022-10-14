@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.geekbrains.materialyou.R
 import com.geekbrains.materialyou.databinding.FragmentMarsBinding
 
 class MarsFragment : Fragment() {
@@ -22,7 +23,11 @@ class MarsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        binding.marsFab.setOnClickListener { requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.container2, EarthFragment())
+            .addToBackStack("")
+            .commit()
+        }
     }
 
     override fun onDestroyView() {

@@ -52,21 +52,6 @@ class ViewPageFragment : Fragment() {
         binding.naviView.selectedItemId = R.id.system_menu
     }
 
-//    private fun setTitleTabLayout() {
-//        binding.viewPager.adapter = ViewPagerAdapter(requireActivity())
-//        TabLayoutMediator(binding.tableLayout, binding.viewPager,
-//            object : TabLayoutMediator.TabConfigurationStrategy {
-//                override fun onConfigureTab(tab: TabLayout.Tab, position: Int) {
-//                    tab.text = when (position) {
-//                        0 -> "Mars"
-//                        1 -> "Earth"
-//                        2 -> "Solar System"
-//                        else -> ""
-//                    }
-//                }
-//            }).attach()
-//    }
-
     private fun switchFragment(fragment: Fragment, container: Int) {
         requireActivity().supportFragmentManager.beginTransaction()
             .replace(container, fragment)

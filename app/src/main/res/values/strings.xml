@@ -79,4 +79,7 @@ var name: String
 Чтобы увидеть, как переопределить метод чтения, добавьте метод get() в определение свойства name, который будет следить за тем, чтобы при обращении к этому свойству возвращалась строка, начинающаяся с прописной буквы.
 
     </string>
+    <string name="first">first</string>
+    <string name="second">second</string>
+    <string name="android_on_earth">Android on earth</string>
 </resources>

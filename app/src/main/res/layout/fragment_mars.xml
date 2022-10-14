@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.fragments.MarsFragment"
-    android:background="@drawable/mars2">
+    android:background="@drawable/mars2"
+    tools:context=".view.fragments.MarsFragment">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/mars_app_bar"
+        android:id="@+id/mars_app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:fitsSystemWindows="true">
@@ -22,6 +21,13 @@
             android:fitsSystemWindows="true"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:toolbarId="@id/mars_tool_bar">
+
+            <ImageView
+                android:layout_width="300dp"
+                android:layout_height="180dp"
+                android:layout_gravity="center"
+                android:background="@drawable/earth"
+                android:contentDescription="@string/earth" />
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/mars_tool_bar"
@@ -42,6 +48,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="60dp"
             android:text="@string/large_text" />
     </androidx.core.widget.NestedScrollView>
 
@@ -49,7 +56,17 @@
         android:id="@+id/mars_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/android_on_earth"
         app:layout_behavior=".view.fragments.behaviors.ButtonBehavior"
         app:srcCompat="@drawable/ic_launcher_foreground" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout >
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/earth"
+        app:civ_border_color="@color/white"
+        app:civ_border_width="2dp"
+        app:layout_behavior=".view.fragments.behaviors.ImageBehavior" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

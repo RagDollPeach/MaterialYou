@@ -4,12 +4,12 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.geekbrains.materialyou"
         minSdk 21
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -45,6 +45,8 @@ android {
 }
 
 dependencies {
+
+    implementation "de.hdodenhof:circleimageview:2.1.0"
 
     //Core
     implementation 'androidx.appcompat:appcompat:1.5.0'
